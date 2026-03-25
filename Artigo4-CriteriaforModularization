@@ -1,0 +1,215 @@
+# 📚 Resumo Completo – On the Criteria To Be Used in Decomposing Systems into Modules (D. L. Parnas)
+
+## 🧾 Referência
+PARNAS, D. L. On the Criteria To Be Used in Decomposing Systems into Modules. Communications of the ACM, v. 15, n. 12, 1972.
+
+---
+
+## 🎯 Objetivo do Artigo
+
+O artigo tem como objetivo discutir **quais critérios devem ser utilizados para dividir um sistema em módulos**, destacando que a eficácia da modularização depende diretamente da forma como essa divisão é feita.
+
+Parnas propõe uma abordagem alternativa à tradicional, visando melhorar:
+- A **flexibilidade** do sistema
+- A **manutenibilidade**
+- A **compreensão**
+- O **tempo de desenvolvimento**
+
+---
+
+## ⚙️ Benefícios Esperados da Modularização
+
+A modularização, quando bem aplicada, traz três principais benefícios:
+
+1. **Gerencial**
+   - Permite que diferentes equipes trabalhem em módulos distintos com pouca comunicação.
+   - Reduz o tempo de desenvolvimento.
+
+2. **Flexibilidade do Produto**
+   - Permite modificar um módulo sem impactar os demais.
+   - Facilita a evolução do sistema.
+
+3. **Compreensibilidade**
+   - O sistema pode ser entendido módulo por módulo.
+   - Reduz a complexidade cognitiva.
+
+---
+
+## ❗ Problema Central
+
+A maioria dos sistemas é modularizada com base nas **etapas do processamento**, ou seja, seguindo um **fluxo sequencial (fluxograma)**.
+
+Exemplo:
+- Entrada → Processamento → Ordenação → Saída
+
+🔴 Problemas dessa abordagem:
+- Forte **acoplamento entre módulos**
+- Mudanças em decisões internas afetam vários módulos
+- Interfaces complexas
+- Baixa flexibilidade
+- Dificuldade de manutenção
+
+---
+
+## 🧪 Estudo de Caso: Sistema KWIC
+
+O artigo apresenta um sistema chamado **KWIC (Key Word In Context)**, que:
+- Recebe linhas de texto
+- Gera todas as rotações circulares dessas linhas
+- Ordena alfabeticamente
+- Exibe o resultado
+
+---
+
+## 🏗️ Modularização 1 (Tradicional)
+
+Baseada em etapas do processamento:
+
+- Módulo 1: Input
+- Módulo 2: Circular Shift
+- Módulo 3: Alphabetizing
+- Módulo 4: Output
+- Módulo 5: Controle
+
+### 🔴 Desvantagens:
+- Forte dependência entre módulos
+- Estruturas de dados compartilhadas
+- Alterações simples (ex: formato de armazenamento) impactam vários módulos
+- Interfaces complexas e rígidas
+- Baixa adaptabilidade
+
+---
+
+## 🔐 Modularização 2 (Proposta – Information Hiding)
+
+Baseada no conceito de **ocultação de informação**:
+
+Cada módulo é responsável por uma **decisão de projeto específica** e esconde seus detalhes internos.
+
+Exemplo de módulos:
+- Armazenamento de linhas (Line Storage)
+- Entrada (Input)
+- Circular Shift
+- Ordenação (Alphabetizer)
+- Saída (Output)
+- Controle
+
+### 🟢 Vantagens:
+- Baixo acoplamento
+- Alta coesão
+- Mudanças ficam isoladas
+- Interfaces simples (baseadas em funções)
+- Independência entre módulos
+- Melhor compreensão
+
+---
+
+## 🔑 Conceito Principal: Information Hiding
+
+> Cada módulo deve esconder uma decisão de projeto que pode mudar ao longo do tempo.
+
+Isso significa:
+- Não dividir o sistema por etapas
+- Dividir com base em **decisões voláteis**
+
+Exemplos de decisões a serem escondidas:
+- Estrutura de dados
+- Formato de armazenamento
+- Algoritmos utilizados
+- Ordem de processamento
+- Representação interna
+
+---
+
+## 🔄 Comparação entre as Abordagens
+
+| Critério | Modularização Tradicional | Information Hiding |
+|----------|--------------------------|-------------------|
+| Base | Etapas do processamento | Decisões de projeto |
+| Acoplamento | Alto | Baixo |
+| Flexibilidade | Baixa | Alta |
+| Manutenção | Difícil | Fácil |
+| Interfaces | Complexas | Simples |
+| Compreensão | Global | Modular |
+
+---
+
+## 🔧 Impacto de Mudanças no Sistema
+
+Parnas mostra que decisões comuns podem mudar, como:
+- Formato de entrada
+- Armazenamento em memória
+- Representação de dados
+- Estratégia de ordenação
+
+### Resultado:
+- Na abordagem tradicional → mudanças afetam vários módulos
+- Na abordagem por ocultação → mudanças afetam apenas um módulo
+
+---
+
+## 🧩 Critérios de Modularização Propostos
+
+1. Cada módulo deve esconder uma decisão de projeto
+2. Interfaces devem expor o mínimo possível
+3. Estruturas de dados devem ser encapsuladas
+4. A organização não deve seguir o fluxo de execução
+5. Módulos devem ser independentes
+
+---
+
+## 🏛️ Estrutura Hierárquica
+
+O sistema pode ser organizado em níveis (hierarquia):
+- Módulos de baixo nível fornecem serviços
+- Módulos de alto nível utilizam esses serviços
+
+### Benefícios:
+- Reutilização de código
+- Possibilidade de reutilizar partes do sistema
+- Facilidade de evolução
+
+⚠️ Importante:
+Hierarquia ≠ boa modularização (são conceitos diferentes, mas complementares)
+
+---
+
+## ⚡ Eficiência vs Modularidade
+
+A abordagem por ocultação pode gerar:
+- Maior custo de chamadas entre módulos
+
+Solução:
+- Uso de ferramentas (ex: compiladores/assemblers) para otimizar a implementação
+- Separar o design lógico da implementação física
+
+---
+
+## 🧠 Ideias Fundamentais do Artigo
+
+- Modularização não é apenas dividir o sistema
+- O critério de divisão é crucial
+- Fluxogramas não são suficientes para sistemas grandes
+- Ocultação de informação é a chave para sistemas robustos
+- Decisões de projeto devem ser isoladas
+
+---
+
+## 🏁 Conclusão
+
+Parnas conclui que:
+
+- A modularização baseada em fluxo de processamento é inadequada
+- A melhor abordagem é baseada em **information hiding**
+- Sistemas bem modularizados são:
+  - Mais fáceis de entender
+  - Mais fáceis de modificar
+  - Mais reutilizáveis
+
+---
+
+## 💡 Frase-chave do Artigo
+
+> "A decomposição de sistemas deve ser baseada nas decisões que podem mudar, e não nas etapas do processamento."
+
+---
